@@ -1,0 +1,57 @@
+import 'package:addcart/data/product_list.dart';
+import 'package:addcart/screens/cart_view.dart';
+import 'package:flutter/material.dart';
+
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  List cartItem = [];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(cartItem.length.toString()),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => cartView(
+                              items: cartItem,
+                            )));
+              },
+              icon: const Icon(Icons.shop))
+        ],
+      ),
+      body: ListView.builder(
+          itemCount: productData.length,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              child: ListTile(
+                tileColor: Colors.grey,
+                title: Text(
+                  productData[index]["Name"],
+                ),
+                subtitle: Text(
+                  productData[index]["price"].toString(),
+                ),
+                trailing: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        cartItem.add(productData[index]);
+                      });
+                    },
+                    icon: const Icon(Icons.add)),
+              ),
+            );
+          }),
+    );
+  }
+}
