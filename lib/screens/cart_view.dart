@@ -16,8 +16,8 @@ class _cartViewState extends State<cartView> {
       body: ListView.builder(
           itemCount: widget.items.length,
           itemBuilder: (context, index) {
-            ListTile(
-              title: Text("${widget.items[index]["name"]}"),
+            return ListTile(
+              title: Text("${widget.items[index]["Name"]}"),
               subtitle: Text("${widget.items[index]["price"]}"),
             );
           }),
